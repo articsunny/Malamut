@@ -1,6 +1,6 @@
 Malamut
 =======
-This is a Wavemaker Studio project.
+This is a Wavemaker Studio project. 
 
 Puppies
 -------
@@ -19,3 +19,5 @@ INSTRUCTIONS
 Wavemaker version 
 -----------------
 Use Wavemaker Studio version  6.5.1 or newer
+
+http://dev.wavemaker.com/wiki/bin/wmdoc/Releases
