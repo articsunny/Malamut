@@ -1,0 +1,15 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.zoutdatabase.data.Korrels" table="korrels" dynamic-insert="false" dynamic-update="false">
+        <id name="korrelId" type="integer">
+            <column name="korrelId"/>
+            <generator class="identity"/>
+        </id>
+        <property name="korrel" type="double">
+            <column name="korrel" not-null="true"/>
+        </property>
+        <property name="userId" type="integer">
+            <column name="userId" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

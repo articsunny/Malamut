@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<beans xsi:schemaLocation="http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:cloud="http://schema.cloudfoundry.org/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <bean class="com.wavemaker.runtime.service.TypeManager" parent="typeManagerBase" scope="singleton" id="typeManager">
+        <property name="types">
+            <map merge="true">
+                <entry key="batchService">
+                    <list/>
+                </entry>
+                <entry key="dbLogUsers">
+                    <list>
+                        <value>com.dblogusers.data.Userlog</value>
+                    </list>
+                </entry>
+                <entry key="decriptPassword">
+                    <list/>
+                </entry>
+                <entry key="emailService">
+                    <list/>
+                </entry>
+                <entry key="encriptPassword">
+                    <list/>
+                </entry>
+                <entry key="issuedatabaseDB">
+                    <list>
+                        <value>com.issuedatabasedb.data.IssueStatus</value>
+                        <value>com.issuedatabasedb.data.IssueType</value>
+                        <value>com.issuedatabasedb.data.Issues</value>
+                    </list>
+                </entry>
+                <entry key="scheduleService">
+                    <list/>
+                </entry>
+                <entry key="securityService">
+                    <list/>
+                </entry>
+                <entry key="securitydatabaseDB">
+                    <list>
+                        <value>com.securitydatabasedb.data.Roles</value>
+                        <value>com.securitydatabasedb.data.Users</value>
+                    </list>
+                </entry>
+                <entry key="zoutDatabase">
+                    <list>
+                        <value>com.zoutdatabase.data.Korrels</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

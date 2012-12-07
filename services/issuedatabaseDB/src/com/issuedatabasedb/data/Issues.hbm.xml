@@ -1,0 +1,18 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.issuedatabasedb.data.Issues" table="issues" dynamic-insert="false" dynamic-update="false">
+        <id name="issueId" type="integer">
+            <column name="issueId"/>
+            <generator class="identity"/>
+        </id>
+        <property name="omschrijving" type="string">
+            <column name="omschrijving" not-null="true"/>
+        </property>
+        <many-to-one name="issuetype" class="com.issuedatabasedb.data.IssueType" cascade="none">
+            <column name="type" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="issuestatus" class="com.issuedatabasedb.data.IssueStatus" cascade="none">
+            <column name="status" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

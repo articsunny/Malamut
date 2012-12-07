@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<beans xsi:schemaLocation="http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:cloud="http://schema.cloudfoundry.org/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <bean class="com.securitydatabasedb.SecuritydatabaseDB" scope="singleton" lazy-init="true" id="securitydatabaseDB">
+        <property name="dataServiceManager">
+            <ref bean="securitydatabaseDBDataService"/>
+        </property>
+        <property name="taskManager">
+            <ref bean="securitydatabaseDBTaskMgr"/>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.spring.WMPropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:securitydatabaseDB.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="true" id="securitydatabaseDBDataSource">
+        <property name="driverClassName" value="${securitydatabaseDB.driverClassName}"/>
+        <property name="url" value="${securitydatabaseDB.connectionUrl}"/>
+        <property name="username" value="${securitydatabaseDB.username}"/>
+        <property name="password" value="${securitydatabaseDB.password}"/>
+    </bean>
+    <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" lazy-init="true" id="securitydatabaseDBTxMgr">
+        <property name="sessionFactory">
+            <ref bean="securitydatabaseDBSessionFactory"/>
+        </property>
+    </bean>
+    <bean class="org.springframework.orm.hibernate3.HibernateTemplate" lazy-init="true" id="securitydatabaseDBHibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="securitydatabaseDBSessionFactory"/>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.spring.ConfigurationAndSessionFactoryBean" lazy-init="true" id="securitydatabaseDBSessionFactory">
+        <property name="name" value="securitydatabaseDB"/>
+        <property name="dataSource" ref="securitydatabaseDBDataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${securitydatabaseDB.dialect}</prop>
+                <prop key="hibernate.transaction.factory_class">
+                    org.hibernate.transaction.JDBCTransactionFactory
+                </prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>com/securitydatabasedb/data/Roles.hbm.xml</value>
+                <value>com/securitydatabasedb/data/Users.hbm.xml</value>
+                <value>com/securitydatabasedb/data/app-queries.ql.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.spring.SpringDataServiceManager" lazy-init="true" id="securitydatabaseDBDataService">
+        <constructor-arg>
+            <value>securitydatabaseDB</value>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="securitydatabaseDBHibernateTemplate"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="securitydatabaseDBTxMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="securitydatabaseDBTaskMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <map>
+                <entry key="useIndividualCRUDOperations" value="false"/>
+                <entry key="refreshEntities" value=""/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.DefaultTaskManager" lazy-init="true" id="securitydatabaseDBTaskMgr"/>
+    <bean class="com.wavemaker.runtime.service.events.EventWire" lazy-init="false">
+        <property name="serviceWire" ref="securitydatabaseDBServiceWire"/>
+        <property name="eventListener">
+            <bean class="com.wavemaker.runtime.data.DataServiceEventListener"/>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.service.reflect.ReflectServiceWire" scope="singleton" lazy-init="false" id="securitydatabaseDBServiceWire">
+        <property name="serviceId" value="securitydatabaseDB"/>
+        <property name="serviceType" ref="DataService"/>
+    </bean>
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="dbLogUsers" class="com.dblogusers.DbLogUsers" CRUDService="true" type="DataService" springFile="dbLogUsers.spring.xml">
+    <dataobjects>
+        <dataobject javaType="com.dblogusers.data.Userlog" supportsQuickData="true">
+            <element name="userlogId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+                <exclude>insert</exclude>
+            </element>
+            <element name="userId" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+            <element name="action" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="datetime" typeRef="java.util.Date" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

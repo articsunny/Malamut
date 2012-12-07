@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="issuedatabaseDB" class="com.issuedatabasedb.IssuedatabaseDB" CRUDService="true" type="DataService" springFile="issuedatabaseDB.spring.xml">
+    <dataobjects>
+        <dataobject javaType="com.issuedatabasedb.data.IssueStatus" supportsQuickData="true">
+            <element name="issueStatusId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+                <exclude>insert</exclude>
+            </element>
+            <element name="status" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="issuess" typeRef="com.issuedatabasedb.data.Issues" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.issuedatabasedb.data.IssueType" supportsQuickData="true">
+            <element name="issueTypeId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+                <exclude>insert</exclude>
+            </element>
+            <element name="type" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="issuess" typeRef="com.issuedatabasedb.data.Issues" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.issuedatabasedb.data.Issues" supportsQuickData="true">
+            <element name="issueId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+                <exclude>insert</exclude>
+            </element>
+            <element name="omschrijving" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="issuetype" typeRef="com.issuedatabasedb.data.IssueType" isList="false" allowNull="false"/>
+            <element name="issuestatus" typeRef="com.issuedatabasedb.data.IssueStatus" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

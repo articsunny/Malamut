@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<beans xsi:schemaLocation="http://schema.cloudfoundry.org/spring http://schema.cloudfoundry.org/spring/cloudfoundry-spring-0.8.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd" xmlns="http://www.springframework.org/schema/beans" xmlns:cloud="http://schema.cloudfoundry.org/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <bean class="com.dblogusers.DbLogUsers" scope="singleton" lazy-init="true" id="dbLogUsers">
+        <property name="dataServiceManager">
+            <ref bean="dbLogUsersDataService"/>
+        </property>
+        <property name="taskManager">
+            <ref bean="dbLogUsersTaskMgr"/>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.spring.WMPropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:dbLogUsers.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="true" id="dbLogUsersDataSource">
+        <property name="driverClassName" value="${dbLogUsers.driverClassName}"/>
+        <property name="url" value="${dbLogUsers.connectionUrl}"/>
+        <property name="username" value="${dbLogUsers.username}"/>
+        <property name="password" value="${dbLogUsers.password}"/>
+    </bean>
+    <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" lazy-init="true" id="dbLogUsersTxMgr">
+        <property name="sessionFactory">
+            <ref bean="dbLogUsersSessionFactory"/>
+        </property>
+    </bean>
+    <bean class="org.springframework.orm.hibernate3.HibernateTemplate" lazy-init="true" id="dbLogUsersHibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="dbLogUsersSessionFactory"/>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.spring.ConfigurationAndSessionFactoryBean" lazy-init="true" id="dbLogUsersSessionFactory">
+        <property name="name" value="dbLogUsers"/>
+        <property name="dataSource" ref="dbLogUsersDataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${dbLogUsers.dialect}</prop>
+                <prop key="hibernate.transaction.factory_class">
+                    org.hibernate.transaction.JDBCTransactionFactory
+                </prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>com/dblogusers/data/Userlog.hbm.xml</value>
+                <value>com/dblogusers/data/app-queries.ql.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.spring.SpringDataServiceManager" lazy-init="true" id="dbLogUsersDataService">
+        <constructor-arg>
+            <value>dbLogUsers</value>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="dbLogUsersHibernateTemplate"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="dbLogUsersTxMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="dbLogUsersTaskMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <map>
+                <entry key="useIndividualCRUDOperations" value="false"/>
+                <entry key="refreshEntities" value=""/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean class="com.wavemaker.runtime.data.DefaultTaskManager" lazy-init="true" id="dbLogUsersTaskMgr"/>
+    <bean class="com.wavemaker.runtime.service.events.EventWire" lazy-init="false">
+        <property name="serviceWire" ref="dbLogUsersServiceWire"/>
+        <property name="eventListener">
+            <bean class="com.wavemaker.runtime.data.DataServiceEventListener"/>
+        </property>
+    </bean>
+    <bean class="com.wavemaker.runtime.service.reflect.ReflectServiceWire" scope="singleton" lazy-init="false" id="dbLogUsersServiceWire">
+        <property name="serviceId" value="dbLogUsers"/>
+        <property name="serviceType" ref="DataService"/>
+    </bean>
+</beans>

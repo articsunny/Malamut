@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="zoutDatabase" class="com.zoutdatabase.ZoutDatabase" CRUDService="true" type="DataService" springFile="zoutDatabase.spring.xml">
+    <dataobjects>
+        <dataobject javaType="com.zoutdatabase.data.Korrels" supportsQuickData="true">
+            <element name="korrelId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+                <exclude>insert</exclude>
+            </element>
+            <element name="korrel" typeRef="java.lang.Double" isList="false" allowNull="false"/>
+            <element name="userId" typeRef="java.lang.Integer" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="securitydatabaseDB" class="com.securitydatabasedb.SecuritydatabaseDB" CRUDService="true" type="DataService" springFile="securitydatabaseDB.spring.xml">
+    <dataobjects>
+        <dataobject javaType="com.securitydatabasedb.data.Roles" supportsQuickData="true">
+            <element name="roleId" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+                <exclude>insert</exclude>
+            </element>
+            <element name="roleName" typeRef="java.lang.String" isList="false" allowNull="true"/>
+            <element name="userss" typeRef="com.securitydatabasedb.data.Users" isList="true" allowNull="true"/>
+        </dataobject>
+        <dataobject javaType="com.securitydatabasedb.data.Users" supportsQuickData="true">
+            <element name="id" typeRef="java.lang.Integer" isList="false" allowNull="false">
+                <require>delete</require>
+                <require>read</require>
+                <require>update</require>
+                <noChange>delete</noChange>
+                <noChange>read</noChange>
+                <noChange>update</noChange>
+                <exclude>insert</exclude>
+            </element>
+            <element name="name" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="password" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="email" typeRef="java.lang.String" isList="false" allowNull="false"/>
+            <element name="relrole" typeRef="com.securitydatabasedb.data.Roles" isList="false" allowNull="false"/>
+        </dataobject>
+    </dataobjects>
+</service>
