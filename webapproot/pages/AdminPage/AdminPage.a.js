@@ -7,7 +7,7 @@ _end: 0
 
 AdminPage.widgets = {
 layoutBox1: ["wm.Layout", {"horizontalAlign":"left","verticalAlign":"top"}, {}, {
-tabLayers1: ["wm.TabLayers", {"defaultLayer":0,"headerWidth":"100px","layoutKind":"left-to-right","verticalButtons":true}, {}, {
+tabLayers1: ["wm.TabLayers", {"defaultLayer":0,"headerWidth":"120px","layoutKind":"left-to-right","verticalButtons":true}, {}, {
 layerAdminDashboard: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Dashboard","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 dashboardAdmin: ["wm.Dashboard", {"hasResizableColumns":true,"margin":"4","saveInCookie":false,"withHandles":false,"portlets":[{"id":"portlet","title":"CountUsers","page":"PortletAdminUserscount","isOpen":true,"isClosable":false,"x":0,"y":0}]}, {}]
 }],
@@ -30,7 +30,10 @@ pageContainer1: ["wm.PageContainer", {"deferLoad":true,"pageName":"LogPage","sub
 }],
 layerAdminScheduler: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Scheduler","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}],
 layerAdminSettings: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Settings","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}],
-layerAdminDbExport: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Dataexport","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}]
+layerAdminImportExport: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Import/Export","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+pageContainer5: ["wm.PageContainer", {"deferLoad":true,"pageName":"DataExportPage","subpageEventlist":{},"subpageMethodlist":{},"subpageProplist":{}}, {}]
+}],
+laveyBackupRestore: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Backup/Restore","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}]
 }]
 }]
 };

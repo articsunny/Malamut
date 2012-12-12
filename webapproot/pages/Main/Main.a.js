@@ -44,13 +44,16 @@ tabLayers1: ["wm.TabLayers", {"defaultLayer":0,"headerHeight":"25px"}, {}, {
 layerHome: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Home","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 picture1: ["wm.Picture", {"height":"100%","source":"resources/images/logos/Android/wavemaker_320x480.png","width":"100%"}, {}]
 }],
-layerIssues: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Issues","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+layerIssues: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Issues","horizontalAlign":"left","roles":["admin"],"themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 panel5: ["wm.Panel", {"height":"20px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}],
 pageContainer3: ["wm.PageContainer", {"deferLoad":true,"pageName":"IssuesPage","subpageEventlist":{},"subpageMethodlist":{},"subpageProplist":{}}, {}]
 }],
-layerAdmin: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Admin","horizontalAlign":"left","themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+layerAdmin: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"Admin","horizontalAlign":"left","roles":["admin"],"themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
 panel2: ["wm.Panel", {"height":"20px","horizontalAlign":"left","layoutKind":"left-to-right","verticalAlign":"top","width":"100%"}, {}],
 pageContainer4: ["wm.PageContainer", {"deferLoad":true,"pageName":"AdminPage","subpageEventlist":{},"subpageMethodlist":{},"subpageProplist":{}}, {}]
+}],
+layerAppDesign: ["wm.Layer", {"border":"1","borderColor":"#999999","caption":"AppDesign","horizontalAlign":"left","roles":["admin"],"themeStyleType":"ContentPanel","verticalAlign":"top"}, {}, {
+pageContainer1: ["wm.PageContainer", {"deferLoad":true,"pageName":"PageAppdesign","subpageEventlist":{},"subpageMethodlist":{},"subpageProplist":{}}, {}]
 }]
 }]
 }],
